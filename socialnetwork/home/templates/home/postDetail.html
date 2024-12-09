@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+        <h2>{{ post.author }} : </h2><h1>{{ post.title }}</h1><br/>
+        <img src="{{ post.picture.url }}"><br/><br/>
+        <h3>{{ post.content }}</h3>
+        <p>{{ post.date_posted }}</p>
+        <a class="btn btn-danger" href={% url 'home:like' post.pk %}>LIKE {{ like }}</a>
+        <a class="btn btn-warning" href={% url 'home:comment' post.pk %}>Comment</a><br/><br/>
+
+        {% if comments %}
+            {% for comment in comments %}
+                <center>
+                    <h2>_______________________________________________________________________________________________</h2>
+                    <h2 class="text-break">{{ comment.commentAuthor }} : </h2><h3>{{ comment.comment }} . ({{ comment.commentDate }})</h3>
+                </center>
+            {% endfor %}
+        {% endif %}
+
+    </center>
+{% endblock %}

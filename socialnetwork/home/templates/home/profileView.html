@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <center>
+        <h1>Profile Page</h1><br/>
+        <h2>{{ user.username }}</h2><br/>
+        {% if request.user.username == user.username %}
+            <a class="btn btn-primary" href={% url 'home:createPost' %}>Create New Post</a><br/><br/>
+        {% endif %}
+        {% if userPosts %}
+            {% for post in userPosts %}
+                <div class="card" style="display: inline-block; width: 18rem; height: 18rem;" >
+                    <img src="{{ post.picture.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p>{{ post.date_posted }}</p>
+                        <a href={% url "home:postDetail" post.id %}>Read More</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </center>
+{% endblock %}
